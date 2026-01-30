@@ -198,7 +198,7 @@ nix-shell -p git vim curl pciutils
 - Clone this repo & CD into it:
 
 ```
-git clone --depth 1 https://github.com/JaKooLit/NixOS-Hyprland.git ~/NixOS-Hyprland
+git clone --depth 1 https://github.com/jonasmac16/NixOS-Hyprland.git ~/NixOS-Hyprland
 cd ~/NixOS-Hyprland
 ```
 
