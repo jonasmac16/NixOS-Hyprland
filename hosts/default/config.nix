@@ -335,7 +335,7 @@ in {
     enable = true;
   };
 
-  console.keyMap = "uk";
+  console.keyMap = "us";
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
