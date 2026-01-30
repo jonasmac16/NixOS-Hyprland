@@ -181,7 +181,7 @@ if [ -d "GTK-themes-icons" ]; then
 fi
 
 echo "$NOTE Cloning GTK themes and Icons repository..."
-if git clone --depth 1 https://github.com/JaKooLit/GTK-themes-icons.git; then
+if git clone --depth 1 https://github.com/jonasmac16/GTK-themes-icons.git; then
     cd GTK-themes-icons
     chmod +x auto-extract.sh
     ./auto-extract.sh
@@ -228,7 +228,7 @@ if [ -d ~/Hyprland-Dots ]; then
     chmod +x copy.sh
     ./copy.sh
 else
-    if git clone --depth 1 https://github.com/JaKooLit/Hyprland-Dots ~/Hyprland-Dots; then
+    if git clone --depth 1 https://github.com/jonasmac16/Hyprland-Dots ~/Hyprland-Dots; then
         cd ~/Hyprland-Dots || exit 1
         chmod +x copy.sh
         ./copy.sh
