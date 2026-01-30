@@ -135,8 +135,8 @@ done
 echo "-----"
 
 echo "$NOTE Setting Required Nix Settings Then Going To Install"
-git config --global user.name "installer"
-git config --global user.email "installer@gmail.com"
+git config --global user.name "jonasmac16"
+git config --global user.email "jonas.mackerodt@nds.ox.ac.uk"
 git add .
 # Update host in flake.nix (first occurrence of host = "...")
 sed -i -E '0,/(^\s*host\s*=\s*")([^"]*)(";)/s//\1'"$hostName"'\3/' ./flake.nix
