@@ -257,8 +257,8 @@ in {
 
   # Extra Logitech Support
   hardware = {
-    logitech.wireless.enable = false;
-    logitech.wireless.enableGraphical = false;
+    logitech.wireless.enable = true;
+    logitech.wireless.enableGraphical = true;
   };
 
   services.pulseaudio.enable = false; # stable branch
