@@ -64,6 +64,9 @@ in {
       canTouchEfiVariables = true;
     };
 
+    # Add LUKS information before install if disk is encrypted
+    # boot.initrd.luks.devices."luks-XXXX".device = "/dev/disk/by-uuid/XXXX";
+
     loader.timeout = 5;
 
     # Bootloader GRUB
