@@ -17,7 +17,7 @@
       xwayland.enable = true;
     };
     zsh.enable = true;
-    firefox.enable = false;
+    firefox.enable = true;
     waybar.enable = false; #started by Hyprland dotfiles. Enabling causes two waybars
     hyprlock.enable = true;
     dconf.enable = true;
