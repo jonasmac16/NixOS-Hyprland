@@ -246,6 +246,7 @@
     vlc
 
     # Terminals
+    alacritty
     kitty
     wezterm
   ];
