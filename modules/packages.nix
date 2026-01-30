@@ -234,9 +234,11 @@
     # Development related
     luarocks
     nh
+    vscode
 
     # Internet
     discord
+    beeper
 
     # Virtuaizaiton
     virt-viewer
@@ -249,6 +251,19 @@
     alacritty
     kitty
     wezterm
+
+    # Office Suite
+    libreoffice
+    hunspell
+    hunspellDicts.en_GB-large
+
+    # Academic apps
+    yed
+    zotero
+    obsidian
+
+    # Proton
+    proton-pass
   ];
   environment.variables = {
     JAKOS_NIXOS_VERSION = "0.0.5";
