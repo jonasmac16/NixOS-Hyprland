@@ -239,6 +239,7 @@
     # Internet
     discord
     beeper
+    ferdium
 
     # Virtuaizaiton
     virt-viewer
@@ -246,6 +247,7 @@
 
     # Video
     vlc
+    spotify-player
 
     # Terminals
     alacritty
