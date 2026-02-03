@@ -130,7 +130,10 @@ in {
 
   # networking
   networking = {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [ networkmanager-openconnect ];
+    };
     hostName = "${host}";
     timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
   };
