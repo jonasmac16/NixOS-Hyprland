@@ -18,6 +18,7 @@ in {
     ../../modules/nvidia-prime-drivers.nix
     ../../modules/intel-drivers.nix
     ../../modules/vm-guest-services.nix
+    ../../modules/local-hardware-clock.nix
     ../../modules/academic.nix
     ../../modules/antivirus.nix
     ../../modules/audio_video.nix
