@@ -7,6 +7,8 @@
     # Dictionaries
     hunspell
     hunspellDicts.en_GB-large
+    # Graphs
+    yed
   ];
 
 }
