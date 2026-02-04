@@ -5,3 +5,4 @@
     virt-viewer
     libvirt
   ];
+}
