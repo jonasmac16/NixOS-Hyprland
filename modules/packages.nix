@@ -37,8 +37,8 @@
     };
 
     thunar.enable = true;
-    thunar.plugins = with pkgs.xfce; [
-      exo
+    thunar.plugins = with pkgs; [
+      xfce4-exo
       mousepad
       thunar-archive-plugin
       thunar-volman
@@ -83,6 +83,7 @@
     nwg-look
     waypaper
     waybar
+    waybar-weather
     hyprland-qt-support # for hyprland-qt-support
 
     #  Apps
@@ -176,6 +177,7 @@
     xarchiver
     yad
     yazi
+    xdg-user-dirs
     yt-dlp
 
     (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default)
