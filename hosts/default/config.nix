@@ -20,7 +20,7 @@ in {
     ../../modules/vm-guest-services.nix
     ../../modules/academic.nix
     ../../modules/antivirus.nix
-    ../../modules/audio-video.nix
+    ../../modules/audio_video.nix
     ../../modules/development.nix
     ../../modules/messaging.nix
     ../../modules/notes.nix
