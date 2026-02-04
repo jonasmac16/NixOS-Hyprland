@@ -28,6 +28,7 @@ in
     ../../modules/notes.nix
     ../../modules/office.nix
     ../../modules/proton.nix
+    ../../vpn.nix
     ../../modules/virtualisation.nix
   ];
 
