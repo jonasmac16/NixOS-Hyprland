@@ -18,7 +18,15 @@ in {
     ../../modules/nvidia-prime-drivers.nix
     ../../modules/intel-drivers.nix
     ../../modules/vm-guest-services.nix
-    ../../modules/local-hardware-clock.nix
+    ../../modules/academic.nix
+    ../../modules/antivirus.nix
+    ../../modules/audio-video.nix
+    ../../modules/development.nix
+    ../../modules/messaging.nix
+    ../../modules/notes.nix
+    ../../modules/office.nix
+    ../../modules/proton.nix
+    ../../modules/virtualisation.nix
   ];
 
   # BOOT related stuff
