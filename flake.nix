@@ -26,6 +26,11 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rycee-nurpkgs = {
+      url = gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
