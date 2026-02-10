@@ -2,11 +2,13 @@
   description = "KooL's NixOS-Hyprland";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
+    #home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixvim.url = "github:nix-community/nixvim/nixos-25.11";
+    #nixvim.url = "github:nix-community/nixvim/nixos-25.11";
+    nixvim.url = "github:nix-community/nixvim";
     #hyprland.url = "github:hyprwm/Hyprland"; # hyprland development
     alejandra.url = "github:kamadorueda/alejandra";
 

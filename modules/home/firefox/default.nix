@@ -1,18 +1,7 @@
-{ pkgs, config, specialArgs, ... }:
+{ pkgs, config, inputs, ... }:
 
 let
-  inherit (specialArgs) addons;
 
-  extensions = with addons; [
-    proton-pass
-    darkreader
-    # auto-accepts cookies, use only with privacy-badger & ublock-origin
-    istilldontcareaboutcookies
-    consent-o-matic
-    privacy-badger
-    ublock-origin
-    tridactyl
-  ];
 
   # disable the annoying floating icon with camera and mic when on a call
   disableWebRtcIndicator = ''
@@ -23,11 +12,6 @@ let
 
   userChrome = disableWebRtcIndicator;
 
-  # DPI settings
-  dpiSettings = {
-    # see home/modules/browser.nix
-    "layout.css.devPixelsPerPx" = config.programs.browser.settings.dpi;
-  };
 
   # ~/.mozilla/firefox/PROFILE_NAME/prefs.js | user.js
   settings = {
@@ -95,7 +79,7 @@ let
     "security.webauth.webauthn_enable_usbtoken" = true;
 
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-  } // dpiSettings;
+  };
 
   demoSettings = {
     "accessibility.force_disabled" = 1;
@@ -173,7 +157,16 @@ in
     profiles = {
       default = {
         id = 0;
-        extensions.packages = extensions;
+        extensions.packages = with inputs.rycee-nurpkgs.packages.${pkgs.system}; [
+          proton-pass
+          darkreader
+          # auto-accepts cookies, use only with privacy-badger & ublock-origin
+          istilldontcareaboutcookies
+          consent-o-matic
+          privacy-badger
+          ublock-origin
+          tridactyl
+        ];
         inherit settings userChrome;
       };
     };
