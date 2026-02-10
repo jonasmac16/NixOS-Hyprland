@@ -83,6 +83,7 @@
     nwg-look
     waypaper
     waybar
+    waybar-weather
     hyprland-qt-support # for hyprland-qt-support
 
     #  Apps
@@ -176,6 +177,7 @@
     xarchiver
     yad
     yazi
+    xdg-user-dirs
     yt-dlp
 
     (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default)
@@ -207,7 +209,6 @@
     ugrep
     unrar
     v4l-utils
-    obs-studio
     zoxide
 
     # Hardware related
@@ -234,38 +235,11 @@
     # Development related
     luarocks
     nh
-    vscode
-
-    # Internet
-    discord
-    beeper
-    ferdium
-
-    # Virtuaizaiton
-    virt-viewer
-    libvirt
-
-    # Video
-    vlc
-    spotify-player
 
     # Terminals
     alacritty
     kitty
     wezterm
-
-    # Office Suite
-    libreoffice
-    hunspell
-    hunspellDicts.en_GB-large
-
-    # Academic apps
-    yed
-    zotero
-    obsidian
-
-    # Proton
-    proton-pass
   ];
   environment.variables = {
     JAKOS_NIXOS_VERSION = "0.0.5";

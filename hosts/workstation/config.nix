@@ -1,14 +1,15 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # Main default config
-{
-  pkgs,
-  host,
-  username,
-  options,
-  ...
-}: let
+{ pkgs
+, host
+, username
+, options
+, ...
+}:
+let
   inherit (import ./variables.nix) keyboardLayout;
-in {
+in
+{
   imports = [
     ./hardware.nix
     ./users.nix
@@ -19,12 +20,22 @@ in {
     ../../modules/intel-drivers.nix
     ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
+    ../../modules/academic.nix
+    ../../modules/antivirus.nix
+    ../../modules/audio_video.nix
+    ../../modules/development.nix
+    ../../modules/messaging.nix
+    ../../modules/notes.nix
+    ../../modules/office.nix
+    ../../modules/proton.nix
+    ../../modules/vpn.nix
+    ../../modules/virtualisation.nix
   ];
 
   # BOOT related stuff
   boot = {
-    #kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
-    kernelPackages = pkgs.linuxPackages_latest; # Kernel
+    kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
+    #kernelPackages = pkgs.linuxPackages_latest; # Kernel
 
     kernelParams = [
       "systemd.mask=systemd-vconsole-setup.service"
@@ -35,8 +46,13 @@ in {
     ];
 
     # This is for OBS Virtual Cam Support
-    #kernelModules = [ "v4l2loopback" ];
-    #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    # kernelModules = [ "v4l2loopback" ];
+    # extraModulePackages = with config.boot.kernelPackages; [
+    #     v4l2loopback
+    # ];
+    # extraModprobeConfig = ''
+    #     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    # '';
 
     initrd = {
       availableKernelModules = [
@@ -47,9 +63,16 @@ in {
         "usbhid"
         "sd_mod"
       ];
-      kernelModules = [];
+      kernelModules = [ ];
     };
 
+    # Needed For Some Steam Games
+    #kernel.sysctl = {
+    #  "vm.max_map_count" = 2147483642;
+    #};
+
+    ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub
+    # Bootloader SystemD
     loader.systemd-boot.enable = true;
 
     loader.efi = {
@@ -57,7 +80,23 @@ in {
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = 10;
+    # Add LUKS information before install if disk is encrypted
+    initrd.luks.devices."luks-902098a8-3c57-4f21-b4d9-f1af4be9dc80".device = "/dev/disk/by-uuid/902098a8-3c57-4f21-b4d9-f1af4be9dc80";
+
+    loader.timeout = 5;
+
+    # Bootloader GRUB
+    #loader.grub = {
+    #enable = true;
+    #  devices = [ "nodev" ];
+    #  efiSupport = true;
+    #  gfxmodeBios = "auto";
+    #  memtest86.enable = true;
+    #  extraGrubInstallArgs = [ "--bootloader-id=${host}" ];
+    #  configurationName = "${host}";
+    #	 };
+
+    # Bootloader GRUB theme, configure below
 
     ## -end of BOOTLOADERS----- ##
 
@@ -77,13 +116,19 @@ in {
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
 
-    plymouth.enable = false;
+    plymouth.enable = true;
   };
+
+  # GRUB Bootloader theme. Of course you need to enable GRUB above.. duh! and also, enable it on flake.nix
+  #distro-grub-themes = {
+  #  enable = true;
+  #  theme = "nixos";
+  #};
 
   # Extra Module Options
   drivers = {
-    amdgpu.enable = false;
-    intel.enable = false;
+    amdgpu.enable = true;
+    intel.enable = true;
     nvidia.enable = false;
     nvidia-prime = {
       enable = false;
@@ -91,38 +136,37 @@ in {
       nvidiaBusID = "";
     };
   };
-  vm.guest-services.enable = true;
-  local.hardware-clock.enable = false;
-
-  services = {
-    qemuGuest.enable = true;
-    spice-vdagentd.enable = true;
-    spice-webdavd.enable = true;
-  };
+  vm.guest-services.enable = false;
+  #  local.hardware-clock.enable = false;
 
   # networking
   networking = {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [ networkmanager-openconnect ];
+    };
     hostName = "${host}";
-    timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
+    timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
   };
 
   # Set your time zone.
   services.automatic-timezoned.enable = true; # based on IP location
 
+  #https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS = "en_GB.UTF-8";
+    LC_IDENTIFICATION = "en_GB.UTF-8";
+    LC_MEASUREMENT = "en_GB.UTF-8";
+    LC_MONETARY = "en_GB.UTF-8";
+    LC_NAME = "en_GB.UTF-8";
+    LC_NUMERIC = "en_GB.UTF-8";
+    LC_PAPER = "en_GB.UTF-8";
+    LC_TELEPHONE = "en_GB.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
   };
 
   # Services to start
@@ -169,14 +213,14 @@ in {
     openssh.enable = true;
     flatpak.enable = true;
 
-    blueman.enable = false;
+    blueman.enable = true;
 
     #hardware.openrgb.enable = true;
     #hardware.openrgb.motherboard = "amd";
 
-    fwupd.enable = false;
+    fwupd.enable = true;
 
-    upower.enable = false;
+    upower.enable = true;
 
     gnome.gnome-keyring.enable = true;
 
@@ -194,10 +238,17 @@ in {
     #};
 
     #ipp-usb.enable = true;
+
+    #syncthing = {
+    #  enable = false;
+    #  user = "${username}";
+    #  dataDir = "/home/${username}";
+    #  configDir = "/home/${username}/.config/syncthing";
+    #};
   };
 
   systemd.services.flatpak-repo = {
-    path = [pkgs.flatpak];
+    path = [ pkgs.flatpak ];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
@@ -214,7 +265,7 @@ in {
 
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "schedutil";
+    cpuFreqGovernor = "performance";
   };
 
   #hardware.sane = {
@@ -225,8 +276,8 @@ in {
 
   # Extra Logitech Support
   hardware = {
-    logitech.wireless.enable = false;
-    logitech.wireless.enableGraphical = false;
+    logitech.wireless.enable = true;
+    logitech.wireless.enableGraphical = true;
   };
 
   services.pulseaudio.enable = false; # stable branch
@@ -234,8 +285,8 @@ in {
   # Bluetooth
   hardware = {
     bluetooth = {
-      enable = false;
-      powerOnBoot = false;
+      enable = true;
+      powerOnBoot = true;
       settings = {
         General = {
           Enable = "Source,Sink,Media,Socket";
@@ -280,8 +331,8 @@ in {
         "nix-command"
         "flakes"
       ];
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
@@ -291,11 +342,11 @@ in {
   };
 
   # Virtualization / Containers
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = false;
   virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+    enable = false;
+    dockerCompat = false;
+    defaultNetwork.settings.dns_enabled = false;
   };
 
   # OpenGL
@@ -304,8 +355,6 @@ in {
   };
 
   console.keyMap = "us";
-
-  security.sudo.wheelNeedsPassword = false;
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -318,5 +367,11 @@ in {
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "25.11"; # Did you read the comment?
 }

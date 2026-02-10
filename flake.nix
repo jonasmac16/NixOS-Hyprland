@@ -36,8 +36,8 @@
     ...
   }: let
     system = "x86_64-linux";
-    host = "jak-hl";
-    username = "dwilliams";
+    host = "workstation";
+    username = "jonas";
 
     pkgs = import nixpkgs {
       inherit system;
@@ -81,7 +81,7 @@
             home-manager.users.${username} = {
               home.username = username;
               home.homeDirectory = "/home/${username}";
-              home.stateVersion = "24.05";
+              home.stateVersion = "25.11";
 
               # Import your copied HM modules
               imports = [

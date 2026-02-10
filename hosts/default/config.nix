@@ -19,6 +19,15 @@ in {
     ../../modules/intel-drivers.nix
     ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
+    ../../modules/academic.nix
+    ../../modules/antivirus.nix
+    ../../modules/audio_video.nix
+    ../../modules/development.nix
+    ../../modules/messaging.nix
+    ../../modules/notes.nix
+    ../../modules/office.nix
+    ../../modules/proton.nix
+    ../../modules/virtualisation.nix
   ];
 
   # BOOT related stuff
@@ -126,11 +135,14 @@ in {
     };
   };
   vm.guest-services.enable = false;
-  local.hardware-clock.enable = false;
+#  local.hardware-clock.enable = false;
 
   # networking
   networking = {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [ networkmanager-openconnect ];
+    };
     hostName = "${host}";
     timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
   };
