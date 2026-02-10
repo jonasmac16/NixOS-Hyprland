@@ -1,14 +1,15 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # Main default config
-{
-  pkgs,
-  host,
-  username,
-  options,
-  ...
-}: let
+{ pkgs
+, host
+, username
+, options
+, ...
+}:
+let
   inherit (import ./variables.nix) keyboardLayout;
-in {
+in
+{
   imports = [
     ./hardware.nix
     ./users.nix
@@ -19,7 +20,17 @@ in {
     ../../modules/intel-drivers.nix
     ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
+    ../../modules/academic.nix
     ../../modules/antivirus.nix
+    ../../modules/audio_video.nix
+    ../../modules/development.nix
+    ../../modules/messaging.nix
+    ../../modules/notes.nix
+    ../../modules/office.nix
+    ../../modules/proton.nix
+    ../../modules/vpn.nix
+    ../../modules/virtualisation.nix
+
   ];
 
   # BOOT related stuff
@@ -53,7 +64,7 @@ in {
         "usbhid"
         "sd_mod"
       ];
-      kernelModules = [];
+      kernelModules = [ ];
     };
 
     # Needed For Some Steam Games
@@ -136,7 +147,7 @@ in {
       plugins = with pkgs; [ networkmanager-openconnect ];
     };
     hostName = "${host}";
-    timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
+    timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
   };
 
   # Set your time zone.
@@ -238,7 +249,7 @@ in {
   };
 
   systemd.services.flatpak-repo = {
-    path = [pkgs.flatpak];
+    path = [ pkgs.flatpak ];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
@@ -321,8 +332,8 @@ in {
         "nix-command"
         "flakes"
       ];
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
