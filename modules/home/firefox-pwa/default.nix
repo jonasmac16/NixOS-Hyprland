@@ -9,12 +9,18 @@
 
   };
 
-  programs.firefoxpwa.profiles.chatgpt = {
-    name = "ChatGPT";
-    # The URL that opens when you launch the app
-    settings.start_url = "https://chatgpt.com";
-    # Optional: Force a specific icon if you have one locally
-    # icon = ./path/to/chatgpt-icon.png;
+  programs.firefoxpwa.profiles = {
+    # This 26-character ID is required by Home Manager
+    "01J5X9V6G3H7K8M2N4P6Q8R9ST" = {
+      name = "ChatGPT";
+      sites = {
+        # The site ID inside the profile also needs to be a 26-char ULID
+        "00000000000000000000CHATGP" = {
+          name = "ChatGPT";
+          # Note: 'url' is the correct field for the site entry in recent HM versions
+          url = "https://chatgpt.com";
+        };
+      };
+    };
   };
-
 }
