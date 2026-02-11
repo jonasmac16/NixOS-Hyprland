@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   imports = [
     ./terminals/tmux.nix
     ./terminals/ghostty.nix
@@ -14,5 +14,6 @@
     ./yazi
     ./overview.nix
     ./firefox/default.nix
+    ./firefox-pwa/default.nix
   ];
 }
