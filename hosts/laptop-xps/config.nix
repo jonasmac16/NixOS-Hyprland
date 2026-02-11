@@ -29,7 +29,7 @@ in
     ../../modules/office.nix
     ../../modules/proton.nix
     ../../modules/vpn.nix
-    ../../modules/virtualisation.nix
+    #    ../../modules/virtualisation.nix
 
   ];
 
