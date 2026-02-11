@@ -34,8 +34,19 @@ in
 
   # BOOT related stuff
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
+    #kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
     #kernelPackages = pkgs.linuxPackages_latest; # Kernel
+
+    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_16.override {
+      argsOverride = rec {
+        src = pkgs.fetchurl {
+          url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+          sha256 = "sha256-7ca4debc5ca912ebb8a76944a5c118afd5d09e31ef43c494adb14273da29a26e";
+        };
+        version = "6.16.12";
+        modDirVersion = "6.16.12";
+      };
+    });
 
     kernelParams = [
       "systemd.mask=systemd-vconsole-setup.service"
