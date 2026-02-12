@@ -26,6 +26,7 @@ in
     ../../modules/development.nix
     ../../modules/messaging.nix
     ../../modules/notes.nix
+    ../../modules/onedrive.nix
     ../../modules/office.nix
     ../../modules/proton.nix
     ../../modules/vpn.nix
