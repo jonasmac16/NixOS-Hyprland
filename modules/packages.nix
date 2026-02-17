@@ -240,6 +240,14 @@
     alacritty
     kitty
     wezterm
+
+    # Cisco AnyConnect SSO
+    openconnect
+    #globalprotect-openconnect
+    networkmanager-openconnect
+
+    cifs-utils
+    keyutils
   ];
   environment.variables = {
     JAKOS_NIXOS_VERSION = "0.0.5";
