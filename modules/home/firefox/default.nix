@@ -231,6 +231,7 @@ in
           tridactyl
           sidebery
           adaptive-tab-bar-colour
+          zotero-connector
         ];
         userChrome = (builtins.readFile ./userChrome.css);
         userContent = (builtins.readFile ./userContent.css);
