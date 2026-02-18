@@ -14,7 +14,7 @@
     ./yazi
     ./overview.nix
     ./firefox/default.nix
-    ./zotero/default.nix
+    #./zotero/default.nix
     #    ./firefox-pwa/default.nix
   ];
 }
